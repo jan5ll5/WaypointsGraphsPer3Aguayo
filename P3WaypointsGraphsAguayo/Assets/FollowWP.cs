@@ -2,16 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class FollowWP : MonoBehaviour
 {
     public GameObject[] waypoints;
     int currentWP = 0;
 
     public float speed = 10.0f;
+    public float rotSpeed = 10.0f;
+
+    GameObject tracker;
     // Start is called before the first frame update
     void Start()
     {
-        
+        tracker = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+        DestroyImmediate(tracker.GetComponent<Collider>());
     }
 
     // Update is called once per frame
@@ -30,7 +34,7 @@ public class NewBehaviourScript : MonoBehaviour
 
         Quaternion lookatWp = Quaternion.LookRotation(waypoints[currentWP].transform.position - this.transform.position);
 
-        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, lookatWp, rotSpeed * Time.deltaTime)
+        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, lookatWp, rotSpeed * Time.deltaTime);
         this.transform.Translate(0, 0, speed * Time.deltaTime);
     }
 }
