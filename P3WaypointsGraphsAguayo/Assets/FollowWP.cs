@@ -17,12 +17,14 @@ public class FollowWP : MonoBehaviour
     {
         tracker = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
         DestroyImmediate(tracker.GetComponent<Collider>());
+        tracker.GetComponent<MeshRenderer>().enabled = false;
         tracker.transform.position = this.transform.position;
         tracker.transform.rotation = this.transform.rotation;
     }
 
     void ProgressTracker()
     {
+        if (Vector3.Distance(tracker.transform.position, this.transform.position) > lookAhead) return;
         if (Vector3.Distance(tracker.transform.position, waypoints[currentWP].transform.position) < 3)
         {
             currentWP++;
