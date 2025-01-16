@@ -5,24 +5,20 @@ using UnityEngine.AI;
 
 public class FollowWaypoints : MonoBehaviour {
 
-    // Transform goal;
-    // float speed = 5.0f;
-    // float accuracy = 5.0f;
-    // float rotSpeed = 2.0f;
+  
 
     GameObject[] wps;
     GameObject currentNode;
     NavMeshAgent agent;
 
-    // int currentWP = 0;
-    // Graph g;
+    
 
     public GameObject wpManager2;
 
     void Start() {
         Time.timeScale = 5.0f;
         wps = wpManager2.GetComponent<WPManager2>().waypoints;
-        // g = wpManager.GetComponent<WPManager>().graph;
+      
         currentNode = wps[0];
 
         agent = this.GetComponent<NavMeshAgent>();
@@ -33,63 +29,38 @@ public class FollowWaypoints : MonoBehaviour {
     public void GotoHeli() {
 
         //g.AStar(currentNode, wps[0]);
-        //currentWP = 0;
+        agent.SetDestination(wps[0].transform.position);
         GotoHere(0);
     }
 
     public void GotoRuin() {
 
         //g.AStar(currentNode, wps[7]);
-        //currentWP = 0;
+        agent.SetDestination(wps[7].transform.position);
+
         GotoHere(7);
     }
 
     public void GotoRock() {
 
         //g.AStar(currentNode, wps[1]);
-        //currentWP = 0;
+        agent.SetDestination(wps[1].transform.position);
         GotoHere(1);
     }
 
     public void GotoFactory() {
 
         //g.AStar(currentNode, wps[4]);
-        //currentWP = 0;
+        agent.SetDestination(wps[4].transform.position);
         GotoHere(4);
     }
 
     void GotoHere(int value) {
 
-        agent.SetDestination(wps[value].transform.position);
+        
     }
 
     void LateUpdate() {
 
-        //if (g.pathList.Count == 0 || currentWP == g.pathList.Count) return;
-
-        //currentNode = g.getPathPoint(currentWP);
-
-        //if (Vector3.Distance(g.pathList[currentWP].getID().transform.position, transform.position) < accuracy) {
-
-        //    currentWP++;
-        //}
-
-        //if (currentWP < g.pathList.Count) {
-
-        //    goal = g.pathList[currentWP].getID().transform;
-        //    Vector3 lookAtGoal = new Vector3(
-        //        goal.position.x,
-        //        transform.position.y,
-        //        goal.position.z);
-
-        //    Vector3 direction = lookAtGoal - this.transform.position;
-
-        //    transform.rotation = Quaternion.Slerp(
-        //        this.transform.rotation,
-        //        Quaternion.LookRotation(direction),
-        //        Time.deltaTime * rotSpeed);
-
-        //    transform.Translate(0.0f, 0.0f, speed * Time.deltaTime);
-        //}
     }
 }
